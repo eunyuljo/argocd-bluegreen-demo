@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rollouts-demo-blue
+  namespace: rollouts-demo
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blue Version</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #4A90E2 0%, #2E5C8A 100%);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            }
+            .container {
+                text-align: center;
+                padding: 60px;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 20px;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                max-width: 700px;
+                animation: fadeIn 0.5s;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            h1 {
+                font-size: 4em;
+                margin-bottom: 30px;
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            }
+            .version {
+                font-size: 3em;
+                margin: 30px 0;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.25);
+                border-radius: 15px;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+            .badge {
+                display: inline-block;
+                padding: 10px 25px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 25px;
+                margin: 10px;
+                font-size: 1.2em;
+            }
+            .info {
+                margin-top: 30px;
+                font-size: 1.3em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🔵 BLUE</h1>
+            <div class="version">Blue Version</div>
+            <div class="info">
+                <div class="badge">💙 Production</div>
+                <div class="badge">Blue-Green Deployment</div>
+            </div>
+            <div class="info" style="margin-top: 40px; font-size: 1em; opacity: 0.9;">
+                Deployed with ArgoCD + Argo Rollouts
+            </div>
+        </div>
+        <script>
+            setTimeout(() => location.reload(), 3000);
+        </script>
+    </body>
+    </html>
