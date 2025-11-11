@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: rollouts-demo
-        version: blue
+        version: green
     spec:
       containers:
       - name: nginx
@@ -47,7 +47,7 @@ spec:
       volumes:
       - name: html
         configMap:
-          name: rollouts-demo-blue
+          name: rollouts-demo-green
   strategy:
     blueGreen:
       activeService: rollouts-demo-active
