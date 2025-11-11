@@ -9,8 +9,7 @@ metadata:
     app: rollouts-demo
     service: active
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx-tls
   rules:
@@ -24,10 +23,6 @@ spec:
             name: rollouts-demo-active
             port:
               number: 80
-  tls:
-  - hosts:
-    - rollouts-demo.example.com
-    secretName: rollouts-demo-tls
 ---
 # Ingress for Preview Service (Testing)
 apiVersion: networking.k8s.io/v1
@@ -39,8 +34,7 @@ metadata:
     app: rollouts-demo
     service: preview
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx-tls
   rules:
@@ -54,7 +48,3 @@ spec:
             name: rollouts-demo-preview
             port:
               number: 80
-  tls:
-  - hosts:
-    - rollouts-demo-preview.example.com
-    secretName: rollouts-demo-preview-tls
