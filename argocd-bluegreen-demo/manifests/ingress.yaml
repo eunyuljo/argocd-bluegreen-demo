@@ -1,0 +1,60 @@
+---
+# Ingress for Active Service (Production)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rollouts-demo-active-ingress
+  namespace: rollouts-demo
+  labels:
+    app: rollouts-demo
+    service: active
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx-tls
+  rules:
+  - host: rollouts-demo.example-mzc.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rollouts-demo-active
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - rollouts-demo.example.com
+    secretName: rollouts-demo-tls
+---
+# Ingress for Preview Service (Testing)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rollouts-demo-preview-ingress
+  namespace: rollouts-demo
+  labels:
+    app: rollouts-demo
+    service: preview
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx-tls
+  rules:
+  - host: rollouts-demo-preview.example-mzc.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rollouts-demo-preview
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - rollouts-demo-preview.example.com
+    secretName: rollouts-demo-preview-tls
