@@ -20,3 +20,21 @@ spec:
     app: rollouts-demo
 ---
 # Preview Service - 새 버전 테스트
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollouts-demo-preview
+  namespace: rollouts-demo
+  labels:
+    app: rollouts-demo
+    service: preview
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+    nodePort: 30081
+  selector:
+    app: rollouts-demo
